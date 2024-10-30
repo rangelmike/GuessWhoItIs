@@ -1,15 +1,14 @@
 const container = document.getElementById('container');
-const numCards = 7; // Change to the desired number of cards
+const numCards = 7; 
 const cardWidth = (window.innerWidth > 600?200:100);
 const cardHeight = (cardWidth == 200 ? 150 : 75);
 const positions = [];
-const occupied = [];
-const tolerancia = 100000;
+const types = 3;
 
-function angelCard(card){
-    card.textContent="Hola";
+function angelCard(card){    
     card.style.width = `${cardWidth}px`;
     card.style.height = `${cardHeight}px`;
+
     const img = document.createElement('img');
     img.className="wing left";
     img.src="Lwing.png";
@@ -17,6 +16,7 @@ function angelCard(card){
     img.style.left = `-${cardWidth/1.5}px`
     img.style.width = `${cardHeight}px`
     card.append(img);
+
     const img2 = document.createElement('img');
     img2.className="wing right";
     img2.src="Rwing.png";
@@ -25,18 +25,46 @@ function angelCard(card){
     img2.style.width = `${cardHeight}px`
     card.append(img2);
 }
-// Generate random integer between min and max
+
+function haloCard(card){
+    card.style.width = `${cardWidth}px`;
+    card.style.height = `${cardHeight}px`;
+    // card.textContent = text;
+
+    const img = document.createElement('img');
+    img.className="halo";
+    img.src="halo.png";
+    img.alt="halo";
+    card.append(img);
+}
+
+function giveEffect(code, card){
+    switch (code){
+        case 1:
+            card.textContent = "angel";
+            angelCard(card);
+            break;
+        case 2:
+            card.textContent = "halo";
+            haloCard(card);
+            break;
+        case 3:
+            card.textContent = "both";
+            angelCard(card);
+            haloCard(card);
+            break;
+    }
+}
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function findAllAvailablePositions(rectangles, n, m, gridWidth, gridHeight) {
-    // Crea una matriz para marcar las posiciones ocupadas
+function findAllAvailablePositions(rectangles, n, m, gridWidth, gridHeight) {    
     const occupied = Array.from({ length: gridHeight }, () => Array(gridWidth).fill(false));
 
-    // Marca las posiciones ocupadas por los rectángulos existentes
     for (const rect of rectangles) {
-        const { x, y } = rect; // Esquina superior izquierda de cada rectángulo
+        const { x, y } = rect; 
         for (let i = y; i < y + m; i+=10) {
             for (let j = x; j < x + n; j+=10) {
                 if (i < gridHeight && j < gridWidth) {
@@ -45,35 +73,33 @@ function findAllAvailablePositions(rectangles, n, m, gridWidth, gridHeight) {
             }
         }
     }    
-    // Array para almacenar las posiciones válidas
     const validPositions = [];
 
-    // Busca todas las posiciones libres para el nuevo rectángulo
     for (let i = 30; i <= gridHeight - m; i+=10) {
         for (let j = 30; j <= gridWidth - n; j+=10) {
             let canPlace = true;
             for (let x = i; x < i + m; x+=10) {
                 for (let y = j; y < j + n; y+=10) {
                     if (occupied[x][y]) {
-                        canPlace = false; // Hay solapamiento
+                        canPlace = false; 
                         break;
                     }
                 }
                 if (!canPlace) break;
             }
             if (canPlace) {
-                validPositions.push({ x: j, y: i }); // Añade la esquina superior izquierda a la lista
+                validPositions.push({ x: j, y: i });
             }
         }
     }
 
-    return validPositions; // Devuelve todas las posiciones válidas
+    return validPositions; 
 }
 
 function createCard() {
     const card = document.createElement('div');
     card.classList.add('card');
-    angelCard(card);
+    giveEffect(getRandomInt(1,types), card);
     let cont = 0;
     const act=[] = findAllAvailablePositions(positions, cardWidth, cardHeight, window.innerWidth, window.innerHeight);
     const pos = act[getRandomInt(0, act.length)];
