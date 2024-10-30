@@ -1,22 +1,28 @@
 const container = document.getElementById('container');
-const numCards = 5; // Change to the desired number of cards
-const cardWidth = 200;
-const cardHeight = 150;
+const numCards = 7; // Change to the desired number of cards
+const cardWidth = (window.innerWidth > 600?200:100);
+const cardHeight = (cardWidth == 200 ? 150 : 75);
 const positions = [];
 const occupied = [];
 const tolerancia = 100000;
 
 function angelCard(card){
     card.textContent="Hola";
+    card.style.width = `${cardWidth}px`;
+    card.style.height = `${cardHeight}px`;
     const img = document.createElement('img');
     img.className="wing left";
     img.src="Lwing.png";
     img.alt="Left Wing";
+    img.style.left = `-${cardWidth/1.5}px`
+    img.style.width = `${cardHeight}px`
     card.append(img);
     const img2 = document.createElement('img');
     img2.className="wing right";
     img2.src="Rwing.png";
     img2.alt="Right Wing";
+    img2.style.right = `-${cardWidth/1.5}px`
+    img2.style.width = `${cardHeight}px`
     card.append(img2);
 }
 // Generate random integer between min and max
@@ -85,3 +91,4 @@ for (let i = 0; i < numCards; i++) {
     createCard()    
 }
 
+console.log(window.innerWidth, cardWidth);
