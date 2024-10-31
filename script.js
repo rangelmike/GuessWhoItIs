@@ -1,9 +1,9 @@
 const container = document.getElementById('container');
-const numCards = 7; 
+const numCards = 8; 
 const cardWidth = (window.innerWidth > 600?200:100);
 const cardHeight = (cardWidth == 200 ? 150 : 75);
 const positions = [];
-const types = 3;
+const types = 8;
 
 function angelCard(card){    
     card.style.width = `${cardWidth}px`;
@@ -28,13 +28,87 @@ function angelCard(card){
 
 function haloCard(card){
     card.style.width = `${cardWidth}px`;
-    card.style.height = `${cardHeight}px`;
-    // card.textContent = text;
-
+    card.style.height = `${cardHeight}px`;    
+    
     const img = document.createElement('img');
     img.className="halo";
     img.src="halo.png";
     img.alt="halo";
+    img.style.width = `${cardHeight}px`;
+    card.append(img);
+}
+
+function musicCard(card){
+    card.style.width = `${cardWidth}px`;
+    card.style.height = `${cardHeight}px`;
+
+    const img = document.createElement('img');
+    img.className="musicNotes";
+    img.src="musicNotes.png";
+    img.alt="notes";
+    img.style.width = `${cardWidth}px`;
+    card.append(img);
+}
+
+function lightCard(card){
+    card.style.width = `${cardWidth}px`;
+    card.style.height = `${cardHeight}px`;
+
+    const img = document.createElement('img');
+    img.className="TopLight";
+    img.src="TopLight.png";
+    img.alt="Tlight";
+    img.style.width = `${cardWidth*1.3}px`;
+    img.style.height = `${cardHeight*1.3}px`;
+    card.append(img);
+}
+
+function leftCard(card){
+    card.style.width = `${cardWidth}px`;
+    card.style.height = `${cardHeight}px`;
+
+    const img = document.createElement('img');
+    img.className="leftLight";
+    img.src="leftLight.png";
+    img.alt="Llight";
+    img.style.width = `${cardWidth*1.3}px`;
+    card.append(img);
+}
+
+function sunCard(card){
+    card.style.width = `${cardWidth}px`;
+    card.style.height = `${cardHeight}px`;
+    leftCard(card);
+
+    const img = document.createElement('img');
+    img.className="sun";
+    img.src="sun.png";
+    img.alt="sun";
+    img.style.width = `${cardWidth*0.5}px`;    
+    card.append(img);
+}
+
+function multiHearts(card){
+    card.style.width = `${cardWidth}px`;
+    card.style.height = `${cardHeight}px`;
+
+    const img = document.createElement('img');
+    img.className="multiHearts";
+    img.src="MultiHearts.png";
+    img.alt="multiHearts";
+    img.style.width = `${cardWidth}px`;
+    card.append(img);
+}
+
+function pumpingHeart(card){
+    card.style.width = `${cardWidth}px`;
+    card.style.height = `${cardHeight}px`;
+
+    const img = document.createElement('img');
+    img.className="pumpHeart";
+    img.src="PumpHeart.png";
+    img.alt="PumpHeart";
+    img.style.width = `${cardWidth*0.3}px`;
     card.append(img);
 }
 
@@ -52,6 +126,29 @@ function giveEffect(code, card){
             card.textContent = "both";
             angelCard(card);
             haloCard(card);
+            break;
+        case 4:
+            card.textContent = "music";
+            musicCard(card);
+            break;
+        case 5:
+            card.textContent = "spotlight";
+            lightCard(card);
+            break;
+        case 6:
+            card.textContent = "sun";
+            sunCard(card);
+            break;
+        case 7:
+            card.textContent = "heartS";
+            multiHearts(card);
+            break;
+        case 8:
+            card.textContent = "Pumping Heart";
+            pumpingHeart(card);
+            break;
+        default:
+            angelCard(card);
             break;
     }
 }
@@ -96,10 +193,11 @@ function findAllAvailablePositions(rectangles, n, m, gridWidth, gridHeight) {
     return validPositions; 
 }
 
-function createCard() {
+function createCard(index) {
     const card = document.createElement('div');
     card.classList.add('card');
-    giveEffect(getRandomInt(1,types), card);
+    // giveEffect(getRandomInt(1,types), card);
+    giveEffect(index+1, card);
     let cont = 0;
     const act=[] = findAllAvailablePositions(positions, cardWidth, cardHeight, window.innerWidth, window.innerHeight);
     const pos = act[getRandomInt(0, act.length)];
@@ -114,7 +212,7 @@ function createCard() {
 
 // Generate the specified number of cards
 for (let i = 0; i < numCards; i++) {
-    createCard()    
+    createCard(i)    
 }
 
-console.log(window.innerWidth, cardWidth);
+console.log(window.innerWidth, cardHeight);
