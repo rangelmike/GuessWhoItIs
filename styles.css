@@ -38,6 +38,22 @@ p{
   transform: scale(1.05);
 }
 
+.clock{
+  z-index: 1;
+  position: absolute;  
+  top: 65%;
+  right: -5%;
+  height: auto;  
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.2s ease;   
+}
+
+.card:hover .clock {
+  z-index: 2;
+  opacity: 1;
+  transform: translateY(-15%); /* Wings move into place */
+}
+
 .pumpHeart{
   z-index: 1;
   position: absolute;  

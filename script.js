@@ -112,6 +112,18 @@ function pumpingHeart(card){
     card.append(img);
 }
 
+function clockCard(card){
+    card.style.width = `${cardWidth}px`;
+    card.style.height = `${cardHeight}px`;
+
+    const img = document.createElement('img');
+    img.className="clock";
+    img.src="clock.png";
+    img.alt="clock";
+    img.style.width = `${cardWidth*0.5}px`;
+    card.append(img);
+}
+
 function giveEffect(code, card){
     switch (code){
         case 1:
@@ -123,9 +135,8 @@ function giveEffect(code, card){
             haloCard(card);
             break;
         case 3:
-            card.textContent = "both";
-            angelCard(card);
-            haloCard(card);
+            card.textContent = "clock";            
+            clockCard(card);
             break;
         case 4:
             card.textContent = "music";
