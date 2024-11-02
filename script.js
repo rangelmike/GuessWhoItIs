@@ -11,7 +11,7 @@ function angelCard(card){
 
     const img = document.createElement('img');
     img.className="wing left";
-    img.src="Lwing.png";
+    img.src="https://i.ibb.co/1f53SP6/Lwing.png";
     img.alt="Left Wing";
     img.style.left = `-${cardWidth/1.5}px`
     img.style.width = `${cardHeight}px`
@@ -19,7 +19,7 @@ function angelCard(card){
 
     const img2 = document.createElement('img');
     img2.className="wing right";
-    img2.src="Rwing.png";
+    img2.src="https://i.ibb.co/RYZZDzK/Rwing.png";
     img2.alt="Right Wing";
     img2.style.right = `-${cardWidth/1.5}px`
     img2.style.width = `${cardHeight}px`
@@ -32,7 +32,7 @@ function haloCard(card){
     
     const img = document.createElement('img');
     img.className="halo";
-    img.src="halo.png";
+    img.src="https://i.ibb.co/L1fG2tz/halo.png";
     img.alt="halo";
     img.style.width = `${cardHeight}px`;
     card.append(img);
@@ -44,7 +44,7 @@ function musicCard(card){
 
     const img = document.createElement('img');
     img.className="musicNotes";
-    img.src="musicNotes.png";
+    img.src="https://i.ibb.co/PNwvv3V/music-Notes.png";
     img.alt="notes";
     img.style.width = `${cardWidth}px`;
     card.append(img);
@@ -56,7 +56,7 @@ function lightCard(card){
 
     const img = document.createElement('img');
     img.className="TopLight";
-    img.src="TopLight.png";
+    img.src="https://i.ibb.co/TY0SH8F/TopLight.png";
     img.alt="Tlight";
     img.style.width = `${cardWidth*1.3}px`;
     img.style.height = `${cardHeight*1.3}px`;
@@ -69,7 +69,7 @@ function leftCard(card){
 
     const img = document.createElement('img');
     img.className="leftLight";
-    img.src="leftLight.png";
+    img.src="https://i.ibb.co/fr7VLGz/left-Light.png";
     img.alt="Llight";
     img.style.width = `${cardWidth*1.3}px`;
     card.append(img);
@@ -82,7 +82,7 @@ function sunCard(card){
 
     const img = document.createElement('img');
     img.className="sun";
-    img.src="sun.png";
+    img.src="https://i.ibb.co/b2ZT3FK/sun.png";
     img.alt="sun";
     img.style.width = `${cardWidth*0.5}px`;    
     card.append(img);
@@ -94,7 +94,7 @@ function multiHearts(card){
 
     const img = document.createElement('img');
     img.className="multiHearts";
-    img.src="MultiHearts.png";
+    img.src="https://i.ibb.co/ySt75HH/Multi-Hearts.png";
     img.alt="multiHearts";
     img.style.width = `${cardWidth}px`;
     card.append(img);
@@ -106,7 +106,7 @@ function pumpingHeart(card){
 
     const img = document.createElement('img');
     img.className="pumpHeart";
-    img.src="PumpHeart.png";
+    img.src="https://i.ibb.co/7v9JHkZ/Pump-Heart.png";
     img.alt="PumpHeart";
     img.style.width = `${cardWidth*0.3}px`;
     card.append(img);
@@ -118,7 +118,7 @@ function clockCard(card){
 
     const img = document.createElement('img');
     img.className="clock";
-    img.src="clock.png";
+    img.src="https://i.ibb.co/4Vsks1W/clock.png";
     img.alt="clock";
     img.style.width = `${cardWidth*0.5}px`;
     card.append(img);
