@@ -65,7 +65,7 @@ signinBtn.addEventListener("click", async (e) => {
 			const errorMessage = error.message;
 			alert(errorMessage);
 		});
-	window.location.href = "/main.html";
+	window.location.href = "/wallpaper.html";
 });
 /*
 npm run build
