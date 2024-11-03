@@ -14,13 +14,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY.replace(/"/g, ''),
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN.replace(/"/g, ''),
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID.replace(/"/g, ''),
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET.replace(/"/g, ''),
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID.replace(/"/g, ''),
-    appId: import.meta.env.VITE_FIREBASE_APP_ID.replace(/"/g, ''),
-    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL.replace(/"/g, '')
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL
   };
 
 const app = initializeApp(firebaseConfig);
