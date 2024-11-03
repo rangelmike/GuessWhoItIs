@@ -206,7 +206,6 @@ p{
   transform: translateY(-50%) rotate(-20deg);
 }
 
-/* Hover effect */
 .card:hover .wing {
   z-index: 2;
   opacity: 1;

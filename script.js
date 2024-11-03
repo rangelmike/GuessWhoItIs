@@ -1,9 +1,38 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import {
+	getDatabase,
+	ref,	
+	get,
+	child,
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+import {
+	getAuth,
+	signInWithPopup,
+	GoogleAuthProvider,
+	signOut,
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY.replace(/"/g, ''),
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN.replace(/"/g, ''),
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID.replace(/"/g, ''),
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET.replace(/"/g, ''),
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID.replace(/"/g, ''),
+  appId: import.meta.env.VITE_FIREBASE_APP_ID.replace(/"/g, ''),
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL.replace(/"/g, '')
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const provider = new GoogleAuthProvider(app);
+const auth = getAuth(app);
+
 const container = document.getElementById('container');
 const numCards = 8; 
 const cardWidth = (window.innerWidth > 600?200:100);
 const cardHeight = (cardWidth == 200 ? 150 : 75);
-const positions = [];
+const audio = document.getElementById("backgroundMusic");
 const types = 8;
+const occupied = Array.from({ length: window.innerHeight }, () => Array(window.innerWidth).fill(false));
 
 function angelCard(card){    
     card.style.width = `${cardWidth}px`;
@@ -168,19 +197,18 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function findAllAvailablePositions(rectangles, n, m, gridWidth, gridHeight) {    
-    const occupied = Array.from({ length: gridHeight }, () => Array(gridWidth).fill(false));
-
-    for (const rect of rectangles) {
-        const { x, y } = rect; 
-        for (let i = y; i < y + m; i+=10) {
-            for (let j = x; j < x + n; j+=10) {
-                if (i < gridHeight && j < gridWidth) {
-                    occupied[i][j] = true;
-                }
+function placeRectangle({x, y}, n, m){
+    for (let i = y-10; i < y + m+11; i+=10) {
+        for (let j = x-10; j < x + n+11; j+=10) {
+            if (i < window.innerHeight && j < window.innerWidth && i>=0 && j>=0) {
+                occupied[i][j] = true;  
+                // console.log(i,j);              
             }
         }
-    }    
+    }
+}
+
+function findAllAvailablePositions(n, m, gridWidth, gridHeight) {            
     const validPositions = [];
 
     for (let i = 30; i <= gridHeight - m; i+=10) {
@@ -210,20 +238,44 @@ function createCard(index) {
     // giveEffect(getRandomInt(1,types), card);
     giveEffect(index+1, card);
     let cont = 0;
-    const act=[] = findAllAvailablePositions(positions, cardWidth, cardHeight, window.innerWidth, window.innerHeight);
+    const act=[] = findAllAvailablePositions(cardWidth, cardHeight, window.innerWidth, window.innerHeight);
     const pos = act[getRandomInt(0, act.length)];
     if(pos == null) return;
-    // Save position to check against future cards
-    positions.push(pos);
+    // Save position to check against future cards    
+    placeRectangle(pos, cardWidth, cardHeight);
     // Position and add card to container
     card.style.left = `${pos.x}px`;
     card.style.top = `${pos.y}px`;  
     container.appendChild(card);      
-  }
-
-// Generate the specified number of cards
-for (let i = 0; i < numCards; i++) {
-    createCard(i)    
 }
 
-console.log(window.innerWidth, cardHeight);
+function getFromDB(where) {
+	const dbRef = ref(getDatabase());
+	return get(child(dbRef, where))
+		.then((snapshot) => {
+			if (snapshot.exists()) {
+				const regresa = snapshot.val();
+				return regresa;
+			} else {
+				console.log("No data available");
+				return 0;
+			}
+		})
+		.catch((error) => {
+			console.error(error);
+			return 0;
+		});
+}
+
+window.onload = async function () {     
+    console.log(await getFromDB("hola"));
+    placeRectangle({x: 0,y: 0}, audio.offsetHeight, audio.offsetWidth);
+    // console.log(occupied[250][30]);
+    for (let i = 0; i < numCards; i++) {
+        createCard(i)    
+    }        
+    const user=auth.currentUser;
+    if(!user) window.location.href="index.html";
+    console.log(user.email);
+    console.log(user.uid);
+}
