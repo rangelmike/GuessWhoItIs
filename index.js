@@ -14,14 +14,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID,
-    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL
-  };
+    apiKey: "AIzaSyAc1-FWefRK9gNkaprncldWqK2jztLV43A",
+    authDomain: "guesswhoitis-905ed.firebaseapp.com",
+    databaseURL: "https://guesswhoitis-905ed-default-rtdb.firebaseio.com",
+    projectId: "guesswhoitis-905ed",
+    storageBucket: "guesswhoitis-905ed.firebasestorage.app",
+    messagingSenderId: "72462712048",
+    appId: "1:72462712048:web:a1ed1f84eb16b686b95635"
+};
 
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider(app);
