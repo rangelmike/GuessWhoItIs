@@ -69,7 +69,7 @@ signinBtn.addEventListener("click", async (e) => {
 });
 
 window.onload = function () {
-	if(auth != null) window.location.href="wallpaper.html";
+	// if(auth != null) window.location.href="wallpaper.html";
 }
 
 /*
