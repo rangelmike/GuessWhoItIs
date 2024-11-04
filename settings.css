@@ -1,0 +1,32 @@
+button {
+	--accent: blue;
+	margin-top: 5px;
+	font-weight: bold;
+	letter-spacing: 0.1em;
+	border: none;
+	border-radius: 1.1em;
+	background-color: #801A86;
+	cursor: pointer;
+	color: white;
+	padding: 1em 2em;
+	transition: box-shadow ease-in-out 0.3s, background-color ease-in-out 0.1s,
+		letter-spacing ease-in-out 0.1s, transform ease-in-out 0.1s;
+}
+
+button:active {
+	box-shadow: var(--hover-shadows), var(--accent) 0px 0px 30px 5px;
+	background-color: var(--accent);
+	transform: scale(0.95);
+}
+
+#logoutBtn {
+    position: absolute;
+    right: 1%;
+	margin-left: 80%;
+}
+
+#backBtn {
+	position: absolute;
+	bottom: 1%;
+	right: 1%;
+}

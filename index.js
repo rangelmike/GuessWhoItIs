@@ -67,6 +67,11 @@ signinBtn.addEventListener("click", async (e) => {
 		});
 	window.location.href = "/wallpaper.html";
 });
+
+window.onload = function () {
+	if(auth != null) window.location.href="wallpaper.html";
+}
+
 /*
 npm run build
 

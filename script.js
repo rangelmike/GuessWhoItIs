@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import {
 	getDatabase,
-	ref,	
+	ref,
 	get,
 	child,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
@@ -27,14 +27,25 @@ const provider = new GoogleAuthProvider(app);
 const auth = getAuth(app);
 
 const container = document.getElementById('container');
-const numCards = 8; 
 const cardWidth = (window.innerWidth > 600?200:100);
 const cardHeight = (cardWidth == 200 ? 150 : 75);
 const audio = document.getElementById("backgroundMusic");
 const types = 8;
 const occupied = Array.from({ length: window.innerHeight }, () => Array(window.innerWidth).fill(false));
 
-function angelCard(card){    
+const logoutBtn = document.getElementById("logoutBtn");
+const loader = document.getElementById("loader");
+
+logoutBtn.addEventListener("click", () => {
+	signOut(auth);
+	window.location.href = "index.html";
+});
+
+document.getElementById("settingsBtn").addEventListener("click", () => {
+    window.location.href="settings.html"
+});
+
+function angelCard(card){
     card.style.width = `${cardWidth}px`;
     card.style.height = `${cardHeight}px`;
 
@@ -57,8 +68,8 @@ function angelCard(card){
 
 function haloCard(card){
     card.style.width = `${cardWidth}px`;
-    card.style.height = `${cardHeight}px`;    
-    
+    card.style.height = `${cardHeight}px`;
+
     const img = document.createElement('img');
     img.className="halo";
     img.src="https://i.ibb.co/L1fG2tz/halo.png";
@@ -113,7 +124,7 @@ function sunCard(card){
     img.className="sun";
     img.src="https://i.ibb.co/b2ZT3FK/sun.png";
     img.alt="sun";
-    img.style.width = `${cardWidth*0.5}px`;    
+    img.style.width = `${cardWidth*0.5}px`;
     card.append(img);
 }
 
@@ -156,35 +167,27 @@ function clockCard(card){
 function giveEffect(code, card){
     switch (code){
         case 1:
-            card.textContent = "angel";
             angelCard(card);
             break;
         case 2:
-            card.textContent = "halo";
             haloCard(card);
             break;
         case 3:
-            card.textContent = "clock";            
             clockCard(card);
             break;
         case 4:
-            card.textContent = "music";
             musicCard(card);
             break;
         case 5:
-            card.textContent = "spotlight";
             lightCard(card);
             break;
         case 6:
-            card.textContent = "sun";
             sunCard(card);
             break;
         case 7:
-            card.textContent = "heartS";
             multiHearts(card);
             break;
         case 8:
-            card.textContent = "Pumping Heart";
             pumpingHeart(card);
             break;
         default:
@@ -201,14 +204,14 @@ function placeRectangle({x, y}, n, m){
     for (let i = y-10; i < y + m+11; i+=10) {
         for (let j = x-10; j < x + n+11; j+=10) {
             if (i < window.innerHeight && j < window.innerWidth && i>=0 && j>=0) {
-                occupied[i][j] = true;  
-                // console.log(i,j);              
+                occupied[i][j] = true;
+                // console.log(i,j);
             }
         }
     }
 }
 
-function findAllAvailablePositions(n, m, gridWidth, gridHeight) {            
+function findAllAvailablePositions(n, m, gridWidth, gridHeight) {
     const validPositions = [];
 
     for (let i = 30; i <= gridHeight - m; i+=10) {
@@ -217,7 +220,7 @@ function findAllAvailablePositions(n, m, gridWidth, gridHeight) {
             for (let x = i; x < i + m; x+=10) {
                 for (let y = j; y < j + n; y+=10) {
                     if (occupied[x][y]) {
-                        canPlace = false; 
+                        canPlace = false;
                         break;
                     }
                 }
@@ -229,24 +232,40 @@ function findAllAvailablePositions(n, m, gridWidth, gridHeight) {
         }
     }
 
-    return validPositions; 
+    return validPositions;
 }
 
-function createCard(index) {
+function createCard(styles, mensaje) {
     const card = document.createElement('div');
     card.classList.add('card');
-    // giveEffect(getRandomInt(1,types), card);
-    giveEffect(index+1, card);
+    card.textContent = mensaje;    
+    for(let efecto of styles){
+        giveEffect(efecto, card);
+    }
     let cont = 0;
     const act=[] = findAllAvailablePositions(cardWidth, cardHeight, window.innerWidth, window.innerHeight);
     const pos = act[getRandomInt(0, act.length)];
     if(pos == null) return;
-    // Save position to check against future cards    
+    // Save position to check against future cards
     placeRectangle(pos, cardWidth, cardHeight);
     // Position and add card to container
     card.style.left = `${pos.x}px`;
-    card.style.top = `${pos.y}px`;  
-    container.appendChild(card);      
+    card.style.top = `${pos.y}px`;
+    container.appendChild(card);
+}
+
+function selectCards(n, m) {
+    if (n > m) {
+        throw new Error("No se pueden generar n números únicos entre 0 y m-1 si n > m");
+    }
+    const numeros = Array.from({ length: m }, (_, i) => i);
+
+    for (let i = numeros.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [numeros[i], numeros[j]] = [numeros[j], numeros[i]];
+    }
+
+    return numeros.slice(0, n);
 }
 
 function getFromDB(where) {
@@ -267,15 +286,19 @@ function getFromDB(where) {
 		});
 }
 
-window.onload = async function () {     
-    console.log(await getFromDB("hola"));
-    placeRectangle({x: 0,y: 0}, audio.offsetHeight, audio.offsetWidth);
-    // console.log(occupied[250][30]);
+window.onload = async function () {
+    const user=await auth.currentUser;    
+    placeRectangle({x: audio.getBoundingClientRect().top-audio.getBoundingClientRect().top%10,y: audio.getBoundingClientRect().left-audio.getBoundingClientRect().left%10}, audio.offsetHeight, audio.offsetWidth);
+    placeRectangle({x: logoutBtn.getBoundingClientRect().top-logoutBtn.getBoundingClientRect().top%10,y: logoutBtn.getBoundingClientRect().left-logoutBtn.getBoundingClientRect().left%10}, logoutBtn.offsetHeight, logoutBtn.offsetWidth);
+    loader.style.display="block";        
+    if(auth.currentUser == null) window.location.href="index.html";
+    const wallpaperIDs = Object.values(await getFromDB(`/users/${auth.currentUser.uid}/recivedWallpapers`));    
+    const wallpaper = Object.values(await getFromDB(`wallpapers/${wallpaperIDs[0]}`));
+    const numCards=Math.min(7,wallpaper.length);    
     for (let i = 0; i < numCards; i++) {
-        createCard(i)    
-    }        
-    const user=auth.currentUser;
-    if(!user) window.location.href="index.html";
-    console.log(user.email);
-    console.log(user.uid);
+        const efectos = Object.values(wallpaper.at(i).effects);
+        const mensaje = wallpaper.at(i).message;           
+        createCard(efectos, mensaje);
+    }
+    loader.style.display="none";
 }
