@@ -30,7 +30,7 @@ const auth = getAuth(app);
 
 const container = document.getElementById('container');
 const cardWidth = (window.innerWidth > 600?200:150);
-const cardHeight = (cardWidth == 200 ? 150 : 100);
+const cardHeight = (cardWidth == 200 ? 150 : 125);
 const audio = document.getElementById("backgroundMusic");
 const types = 8;
 const occupied = Array.from({ length: window.innerHeight }, () => Array(window.innerWidth).fill(false));

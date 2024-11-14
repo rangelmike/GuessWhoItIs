@@ -36,7 +36,7 @@ const logoutBtn = document.getElementById("logoutBtn");
 const addCardBtn = document.getElementById("addCard");
 const container = document.getElementById("container");
 const cardWidth = (window.innerWidth > 600?200:150);
-const cardHeight = (cardWidth == 200 ? 150 : 100);
+const cardHeight = (cardWidth == 200 ? 150 : 125);
 const effectsList = ["Angel Wings", "Halo", "Clock", "Music Notes", "Spotlight", "Sun", "MultiHearts", "Pumping Heart"];
 const demoEffect = '<p class="effectText">Pumping Heart</p><svg class="w-6 h-6 text-gray-800 dark:text-white svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm5.757-1a1 1 0 1 0 0 2h8.486a1 1 0 1 0 0-2H7.757Z" clip-rule="evenodd"></path> </svg>'
 const addEfInner = '  <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20" fill="none" class="svg-icon"><g stroke-width="1.5" stroke-linecap="round" stroke="#de8a2a"><circle r="7.5" cy="10" cx="10"></circle><path d="m9.99998 7.5v5"></path><path d="m7.5 9.99998h5"></path></g></svg><span class="lable">Add</span>'
