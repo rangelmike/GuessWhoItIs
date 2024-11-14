@@ -276,7 +276,7 @@ document.getElementById("signInBtn").addEventListener("click", async () => {
 });
 
 document.getElementById("backBtn").addEventListener("click", () => {
-	window.location.href = "wallpaper.html";
+	window.location.href = "index.html";
 });
 
 
