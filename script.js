@@ -11,6 +11,8 @@ import {
 	GoogleAuthProvider,
 	signOut,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+import {giveEffect} from "./cards.js";
+
 const firebaseConfig = {
     apiKey: "AIzaSyAc1-FWefRK9gNkaprncldWqK2jztLV43A",
     authDomain: "guesswhoitis-905ed.firebaseapp.com",
@@ -27,174 +29,25 @@ const provider = new GoogleAuthProvider(app);
 const auth = getAuth(app);
 
 const container = document.getElementById('container');
-const cardWidth = (window.innerWidth > 600?200:100);
-const cardHeight = (cardWidth == 200 ? 150 : 75);
+const cardWidth = (window.innerWidth > 600?200:150);
+const cardHeight = (cardWidth == 200 ? 150 : 100);
 const audio = document.getElementById("backgroundMusic");
 const types = 8;
 const occupied = Array.from({ length: window.innerHeight }, () => Array(window.innerWidth).fill(false));
 
-const logoutBtn = document.getElementById("logoutBtn");
+const settingsBtn = document.getElementById("settingsBtn");
 const loader = document.getElementById("loader");
 
-logoutBtn.addEventListener("click", () => {
-	signOut(auth);
-	window.location.href = "index.html";
+const songs = ["https://shorturl.at/j0LqN", "https://shorturl.at/VBilJ", "https://shorturl.at/qIdRM", "https://shorturl.at/y9yVX"];
+
+settingsBtn.addEventListener("click", async (e) => {	
+	window.location.href = "/settings.html";
 });
 
-document.getElementById("settingsBtn").addEventListener("click", () => {
-    window.location.href="settings.html"
-});
-
-function angelCard(card){
-    card.style.width = `${cardWidth}px`;
-    card.style.height = `${cardHeight}px`;
-
-    const img = document.createElement('img');
-    img.className="wing left";
-    img.src="https://i.ibb.co/1f53SP6/Lwing.png";
-    img.alt="Left Wing";
-    img.style.left = `-${cardWidth/1.5}px`
-    img.style.width = `${cardHeight}px`
-    card.append(img);
-
-    const img2 = document.createElement('img');
-    img2.className="wing right";
-    img2.src="https://i.ibb.co/RYZZDzK/Rwing.png";
-    img2.alt="Right Wing";
-    img2.style.right = `-${cardWidth/1.5}px`
-    img2.style.width = `${cardHeight}px`
-    card.append(img2);
-}
-
-function haloCard(card){
-    card.style.width = `${cardWidth}px`;
-    card.style.height = `${cardHeight}px`;
-
-    const img = document.createElement('img');
-    img.className="halo";
-    img.src="https://i.ibb.co/L1fG2tz/halo.png";
-    img.alt="halo";
-    img.style.width = `${cardHeight}px`;
-    card.append(img);
-}
-
-function musicCard(card){
-    card.style.width = `${cardWidth}px`;
-    card.style.height = `${cardHeight}px`;
-
-    const img = document.createElement('img');
-    img.className="musicNotes";
-    img.src="https://i.ibb.co/PNwvv3V/music-Notes.png";
-    img.alt="notes";
-    img.style.width = `${cardWidth}px`;
-    card.append(img);
-}
-
-function lightCard(card){
-    card.style.width = `${cardWidth}px`;
-    card.style.height = `${cardHeight}px`;
-
-    const img = document.createElement('img');
-    img.className="TopLight";
-    img.src="https://i.ibb.co/TY0SH8F/TopLight.png";
-    img.alt="Tlight";
-    img.style.width = `${cardWidth*1.3}px`;
-    img.style.height = `${cardHeight*1.3}px`;
-    card.append(img);
-}
-
-function leftCard(card){
-    card.style.width = `${cardWidth}px`;
-    card.style.height = `${cardHeight}px`;
-
-    const img = document.createElement('img');
-    img.className="leftLight";
-    img.src="https://i.ibb.co/fr7VLGz/left-Light.png";
-    img.alt="Llight";
-    img.style.width = `${cardWidth*1.3}px`;
-    card.append(img);
-}
-
-function sunCard(card){
-    card.style.width = `${cardWidth}px`;
-    card.style.height = `${cardHeight}px`;
-    leftCard(card);
-
-    const img = document.createElement('img');
-    img.className="sun";
-    img.src="https://i.ibb.co/b2ZT3FK/sun.png";
-    img.alt="sun";
-    img.style.width = `${cardWidth*0.5}px`;
-    card.append(img);
-}
-
-function multiHearts(card){
-    card.style.width = `${cardWidth}px`;
-    card.style.height = `${cardHeight}px`;
-
-    const img = document.createElement('img');
-    img.className="multiHearts";
-    img.src="https://i.ibb.co/ySt75HH/Multi-Hearts.png";
-    img.alt="multiHearts";
-    img.style.width = `${cardWidth}px`;
-    card.append(img);
-}
-
-function pumpingHeart(card){
-    card.style.width = `${cardWidth}px`;
-    card.style.height = `${cardHeight}px`;
-
-    const img = document.createElement('img');
-    img.className="pumpHeart";
-    img.src="https://i.ibb.co/7v9JHkZ/Pump-Heart.png";
-    img.alt="PumpHeart";
-    img.style.width = `${cardWidth*0.3}px`;
-    card.append(img);
-}
-
-function clockCard(card){
-    card.style.width = `${cardWidth}px`;
-    card.style.height = `${cardHeight}px`;
-
-    const img = document.createElement('img');
-    img.className="clock";
-    img.src="https://i.ibb.co/4Vsks1W/clock.png";
-    img.alt="clock";
-    img.style.width = `${cardWidth*0.5}px`;
-    card.append(img);
-}
-
-function giveEffect(code, card){
-    switch (code){
-        case 1:
-            angelCard(card);
-            break;
-        case 2:
-            haloCard(card);
-            break;
-        case 3:
-            clockCard(card);
-            break;
-        case 4:
-            musicCard(card);
-            break;
-        case 5:
-            lightCard(card);
-            break;
-        case 6:
-            sunCard(card);
-            break;
-        case 7:
-            multiHearts(card);
-            break;
-        case 8:
-            pumpingHeart(card);
-            break;
-        default:
-            angelCard(card);
-            break;
-    }
-}
+// logoutBtn.addEventListener("click", () => {
+// 	signOut(auth);
+// 	window.location.href = "index.html";
+// });
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -240,7 +93,7 @@ function createCard(styles, mensaje) {
     card.classList.add('card');
     card.textContent = mensaje;    
     for(let efecto of styles){
-        giveEffect(efecto, card);
+        giveEffect(efecto, card, cardWidth, cardHeight);
     }
     let cont = 0;
     const act=[] = findAllAvailablePositions(cardWidth, cardHeight, window.innerWidth, window.innerHeight);
@@ -287,17 +140,16 @@ function getFromDB(where) {
 }
 
 window.onload = async function () {
-    const user=await auth.currentUser;    
-    placeRectangle({x: audio.getBoundingClientRect().top-audio.getBoundingClientRect().top%10,y: audio.getBoundingClientRect().left-audio.getBoundingClientRect().left%10}, audio.offsetHeight, audio.offsetWidth);
-    placeRectangle({x: logoutBtn.getBoundingClientRect().top-logoutBtn.getBoundingClientRect().top%10,y: logoutBtn.getBoundingClientRect().left-logoutBtn.getBoundingClientRect().left%10}, logoutBtn.offsetHeight, logoutBtn.offsetWidth);
-    loader.style.display="block";        
-    if(auth.currentUser == null) window.location.href="index.html";
-    const wallpaperIDs = Object.values(await getFromDB(`/users/${auth.currentUser.uid}/recivedWallpapers`));    
-    const wallpaper = Object.values(await getFromDB(`wallpapers/${wallpaperIDs[0]}`));
-    const numCards=Math.min(7,wallpaper.length);    
+    placeRectangle({x: audio.getBoundingClientRect().top-audio.getBoundingClientRect().top%10,y: audio.getBoundingClientRect().left-audio.getBoundingClientRect().left%10}, audio.offsetHeight, audio.offsetWidth);    
+    loader.style.display="block";                
+    const actSong = songs[getRandomInt(0, songs.length-1)];
+    audio.src=actSong;    
+    const wallpaper = Object.values(await getFromDB(`/`));
+    const numCards=Math.min(7,wallpaper.length);
+    const elegidos = selectCards(numCards, wallpaper.length);        
     for (let i = 0; i < numCards; i++) {
-        const efectos = Object.values(wallpaper.at(i).effects);
-        const mensaje = wallpaper.at(i).message;           
+        const efectos = Object.values(wallpaper.at(elegidos[i]).effects);
+        const mensaje = wallpaper.at(elegidos[i]).message;           
         createCard(efectos, mensaje);
     }
     loader.style.display="none";
