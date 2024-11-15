@@ -100,7 +100,7 @@ function placeRectangle({x, y}, n, m){
 function findAllAvailablePositions(n, m, gridWidth, gridHeight) {
     const validPositions = [];
 
-    for (let i = 30; i <= gridHeight - m; i+=10) {
+    for (let i = 60; i <= gridHeight - m; i+=10) {
         for (let j = 30; j <= gridWidth - n; j+=10) {
             let canPlace = true;
             for (let x = i; x < i + m; x+=10) {

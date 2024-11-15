@@ -5,6 +5,8 @@ body {
   height: 100vh;
   margin: 0;
   background-color: #edcaed;
+  text-align: center;
+  user-select: none;
 }
 
 #container {
@@ -383,6 +385,7 @@ audio{
 .effect{
   position: absolute;
   right: 10px;
+  top: 10px;
   background: black;
   border: none;
   padding: 15px 15px;
