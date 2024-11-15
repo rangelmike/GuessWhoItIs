@@ -1,7 +1,7 @@
 export function angelCard(card, cardWidth, cardHeight){
 
     const img = document.createElement('img');
-    img.className="wing left n1";
+    img.className="wing left n1 img";
     img.src="https://i.ibb.co/1f53SP6/Lwing.png";
     img.alt="Left Wing";
     img.style.left = `-${cardWidth/1.5}px`
@@ -9,7 +9,7 @@ export function angelCard(card, cardWidth, cardHeight){
     card.append(img);
 
     const img2 = document.createElement('img');
-    img2.className="wing right n1";
+    img2.className="wing right n1 img";
     img2.src="https://i.ibb.co/RYZZDzK/Rwing.png";
     img2.alt="Right Wing";
     img2.style.right = `-${cardWidth/1.5}px`
@@ -20,7 +20,7 @@ export function angelCard(card, cardWidth, cardHeight){
 export function haloCard(card, cardWidth, cardHeight){
 
     const img = document.createElement('img');
-    img.className="halo n2";
+    img.className="halo n2 img";
     img.src="https://i.ibb.co/L1fG2tz/halo.png";
     img.alt="halo";
     img.style.width = `${cardHeight}px`;
@@ -30,7 +30,7 @@ export function haloCard(card, cardWidth, cardHeight){
 export function clockCard(card, cardWidth, cardHeight){
 
     const img = document.createElement('img');
-    img.className="clock n3";
+    img.className="clock n3 img";
     img.src="https://i.ibb.co/4Vsks1W/clock.png";
     img.alt="clock";
     img.style.width = `${cardWidth*0.5}px`;
@@ -40,7 +40,7 @@ export function clockCard(card, cardWidth, cardHeight){
 export function musicCard(card, cardWidth, cardHeight){
 
     const img = document.createElement('img');
-    img.className="musicNotes n4";
+    img.className="musicNotes n4 img";
     img.src="https://i.ibb.co/PNwvv3V/music-Notes.png";
     img.alt="notes";
     img.style.width = `${cardWidth}px`;
@@ -50,7 +50,7 @@ export function musicCard(card, cardWidth, cardHeight){
 export function lightCard(card, cardWidth, cardHeight){
 
     const img = document.createElement('img');
-    img.className="TopLight n5";
+    img.className="TopLight n5 img";
     img.src="https://i.ibb.co/TY0SH8F/TopLight.png";
     img.alt="Tlight";
     img.style.width = `${cardWidth*1.3}px`;
@@ -61,7 +61,7 @@ export function lightCard(card, cardWidth, cardHeight){
 export function sunCard(card, cardWidth, cardHeight){
     // leftCard(card);
     const img2 = document.createElement('img');
-    img2.className="leftLight n6";
+    img2.className="leftLight n6 img";
     img2.src="https://i.ibb.co/fr7VLGz/left-Light.png";
     img2.alt="Llight";
     img2.style.width = `${cardWidth*1.3}px`;
@@ -77,7 +77,7 @@ export function sunCard(card, cardWidth, cardHeight){
 export function multiHearts(card, cardWidth, cardHeight){
 
     const img = document.createElement('img');
-    img.className="multiHearts n7";
+    img.className="multiHearts n7 img";
     img.src="https://i.ibb.co/ySt75HH/Multi-Hearts.png";
     img.alt="multiHearts";
     img.style.width = `${cardWidth}px`;
@@ -87,7 +87,7 @@ export function multiHearts(card, cardWidth, cardHeight){
 export function pumpingHeart(card, cardWidth, cardHeight){
 
     const img = document.createElement('img');
-    img.className="pumpHeart n8";
+    img.className="pumpHeart n8 img";
     img.src="https://i.ibb.co/7v9JHkZ/Pump-Heart.png";
     img.alt="PumpHeart";
     img.style.width = `${cardWidth*0.3}px`;

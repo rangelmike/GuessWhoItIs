@@ -4,7 +4,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #f0f0f0;
+  background-color: #edcaed;
 }
 
 #container {
@@ -33,7 +33,7 @@ p{
   transition: transform 0.3s ease;
 }
 
-.card:hover {
+.card:hover , .force-hover{
   z-index: 2;
   transform: scale(1.05);
 }
@@ -48,7 +48,7 @@ p{
   transition: opacity 0.3s ease, transform 0.2s ease;   
 }
 
-.card:hover .clock {
+.card:hover .clock, .force-hover.clock {
   z-index: 2;
   opacity: 1;
   transform: translateY(-15%); /* Wings move into place */
@@ -83,7 +83,7 @@ p{
   }
 }
 
-.card:hover .pumpHeart {
+.card:hover .pumpHeart, .force-hover.pumpHeart {
   z-index: 2;
   opacity: 1;
   transform: translateY(-15%); /* Wings move into place */
@@ -98,7 +98,7 @@ p{
   transition: opacity 0.3s ease, transform 0.2s ease; 
 }
 
-.card:hover .multiHearts {
+.card:hover .multiHearts,.force-hover.multiHearts {
   z-index: 2;
   opacity: 1;
   transform: translateY(-15%); /* Wings move into place */
@@ -115,7 +115,7 @@ p{
   transition: opacity 0.3s ease, transform 0.2s ease; 
 }
 
-.card:hover .sun {
+.card:hover .sun,.force-hover.sun {
   opacity: 1;
   z-index: 2;
   transform: translateY(-20%) rotate(0deg); /* Wings move into place */
@@ -132,7 +132,7 @@ p{
   transition: opacity 0.3s ease, transform 0.2s ease; 
 }
 
-.card:hover .leftLight {
+.card:hover .leftLight,.force-hover.leftLight {
   z-index: 2;
   opacity: 0.7;
   transform: translateY(-20%); /* Wings move into place */
@@ -148,7 +148,7 @@ p{
   transition: opacity 0.3s ease, transform 0.2s ease; 
 }
 
-.card:hover .TopLight {
+.card:hover .TopLight,.force-hover.TopLight {
   z-index: 2;
   opacity: 0.8;
   transform: translateY(30%); /* Wings move into place */
@@ -163,7 +163,7 @@ p{
   transition: opacity 0.3s ease, transform 0.2s ease; 
 }
 
-.card:hover .musicNotes {
+.card:hover .musicNotes,.force-hover.musicNotes {
   z-index: 2;
   opacity: 1;
   transform: translateY(30%); /* Wings move into place */
@@ -179,7 +179,7 @@ p{
   transition: opacity 0.3s ease, transform 0.3s ease; 
 }
 
-.card:hover .halo {
+.card:hover .halo,.force-hover.halo {
   z-index: 2;
   opacity: 1;
   transform: translateY(-50%); /* Wings move into place */
@@ -206,7 +206,7 @@ p{
   transform: translateY(-50%) rotate(-20deg);
 }
 
-.card:hover .wing {
+.card:hover .wing,.force-hover.wing {
   z-index: 2;
   opacity: 1;
   transform: translateY(-50%) rotate(0deg); /* Wings move into place */
@@ -377,4 +377,24 @@ audio{
   100% {
     transform: rotate(25deg)
   }
+}
+
+
+.effect{
+  position: absolute;
+  right: 10px;
+  background: black;
+  border: none;
+  padding: 15px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.effect:hover {
+  background: rgba(126, 119, 119, 0.521);
+  transition: 0.5s;
+}
+
+.effect svg {
+  color: #fff;
 }

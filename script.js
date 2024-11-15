@@ -32,7 +32,7 @@ const container = document.getElementById('container');
 const cardWidth = (window.innerWidth > 600?200:150);
 const cardHeight = (cardWidth == 200 ? 150 : 125);
 const audio = document.getElementById("backgroundMusic");
-const types = 8;
+const toggleHoverBtn = document.getElementById("toggleHover");
 const occupied = Array.from({ length: window.innerHeight }, () => Array(window.innerWidth).fill(false));
 
 const settingsBtn = document.getElementById("settingsBtn");
@@ -42,6 +42,39 @@ const songs = ["https://shorturl.at/j0LqN", "https://shorturl.at/VBilJ", "https:
 
 settingsBtn.addEventListener("click", async (e) => {	
 	window.location.href = "/settings.html";
+});
+
+toggleHoverBtn.addEventListener("mousedown", function (){
+    const cards = document.querySelectorAll(".card");    
+    const img = document.querySelectorAll(".img");    
+    for(let actCard of cards){
+        actCard.classList.add("force-hover");
+    }    
+    for(let actImg of img){
+        actImg.classList.add("force-hover");
+    }
+    
+});
+
+toggleHoverBtn.addEventListener("mouseup", function (){
+    const cards = document.querySelectorAll(".card");
+    const img = document.querySelectorAll(".img");
+    for(let actCard of cards){
+        actCard.classList.remove("force-hover");
+    }
+    for(let actImg of img){
+        actImg.classList.remove("force-hover");
+    }
+});
+toggleHoverBtn.addEventListener("mouseleave", function (){
+    const cards = document.querySelectorAll(".card");
+    const img = document.querySelectorAll(".img");
+    for(let actCard of cards){
+        actCard.classList.remove("force-hover");
+    }
+    for(let actImg of img){
+        actImg.classList.remove("force-hover");
+    }
 });
 
 // logoutBtn.addEventListener("click", () => {
