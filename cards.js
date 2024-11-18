@@ -103,8 +103,7 @@ function starsCard(card, cardWidth, cardHeight){
     card.append(img);
 }
 
-function roseCard(card, cardWidth, cardHeight){
-
+function roseCard(card, cardWidth, cardHeight){    
     const img = document.createElement('img');
     img.className="rose n10 img";
     img.src="https://i.ibb.co/zS9CPr2/Pngtree-beautiful-red-rose-isolated-on-5741837.png";
@@ -143,8 +142,10 @@ export function giveEffect(code, card, cardWidth, cardHeight){
             break;
         case 9:
             starsCard(card, cardWidth, cardHeight);
+            break;
         case 10:
             roseCard(card, cardWidth, cardHeight);
+            break;
         default:            
             // console.log("Invalid code", code);            
             break;

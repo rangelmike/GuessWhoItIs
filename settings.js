@@ -171,7 +171,7 @@ function createCard(styles, mensaje, id) {
 	}
 	addEffBtn.addEventListener("click", function(){
 		if(selectEffect.options.length){			
-		styles.push(parseInt(selectEffect.value));		
+		styles.push(parseInt(selectEffect.value));			
 		// console.log(selectEffect.value);
 		giveEffect(parseInt(selectEffect.value), card, cardWidth, cardHeight);
 		addEffectBanner(parseInt(selectEffect.value));
