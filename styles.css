@@ -44,6 +44,38 @@ p{
   transform: scale(1.05);
 }
 
+
+.rose{
+  z-index: 1;
+  position: absolute;
+  top: 60%;
+  left: -15%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.card:hover .rose , .force-hover.rose{
+  z-index: 2;
+  opacity: 1;
+  transform: rotate(-20deg) scaleX(-1) translateY(-15%); /* Wings move into place */
+}
+
+.stars{
+  z-index: 1;
+  position: absolute;
+  top: 2%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.5s ease;
+}
+
+.card:hover .stars, .force-hover.stars {
+  z-index: 2;
+  opacity: 1;
+  transform: scale(1.2); /* Wings move into place */
+}
+
 .clock{
   z-index: 1;
   position: absolute;

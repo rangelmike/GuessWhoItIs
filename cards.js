@@ -94,6 +94,25 @@ export function pumpingHeart(card, cardWidth, cardHeight){
     card.append(img);
 }
 
+function starsCard(card, cardWidth, cardHeight){
+    const img = document.createElement('img');
+    img.className="stars n9 img";
+    img.src="https://i.ibb.co/0rn6CnR/pngegg.png";
+    img.alt="stars";
+    img.style.width = `${cardWidth}px`;
+    card.append(img);
+}
+
+function roseCard(card, cardWidth, cardHeight){
+
+    const img = document.createElement('img');
+    img.className="rose n10 img";
+    img.src="https://i.ibb.co/zS9CPr2/Pngtree-beautiful-red-rose-isolated-on-5741837.png";
+    img.alt="rose";
+    img.style.width = `${cardWidth*0.5}px`;
+    card.append(img);
+}
+
 export function giveEffect(code, card, cardWidth, cardHeight){
     card.style.width = `${cardWidth}px`;
     card.style.height = `${cardHeight}px`;
@@ -122,6 +141,10 @@ export function giveEffect(code, card, cardWidth, cardHeight){
         case 8:
             pumpingHeart(card, cardWidth, cardHeight);
             break;
+        case 9:
+            starsCard(card, cardWidth, cardHeight);
+        case 10:
+            roseCard(card, cardWidth, cardHeight);
         default:            
             // console.log("Invalid code", code);            
             break;
