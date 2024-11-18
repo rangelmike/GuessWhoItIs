@@ -61,16 +61,20 @@ function getFromDB(where) {
 }
 
 function updateDB(where, effects, message){		
+	const timestamp = Date.now();
 	update(ref(database, where), {
 		effects,
-		message
+		message,
+		timestamp
 	});
 }
 
 function pushToDB(effects, message){
+	const timestamp = Date.now();
 	return push(ref(database, '/'), {
 		effects, 
-		message
+		message, 
+		timestamp
 	}).key;
 }
 

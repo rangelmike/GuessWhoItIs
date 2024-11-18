@@ -40,20 +40,20 @@ const loader = document.getElementById("loader");
 
 const songs = ["https://shorturl.at/j0LqN", "https://shorturl.at/VBilJ", "https://shorturl.at/qIdRM", "https://shorturl.at/y9yVX"];
 
-settingsBtn.addEventListener("click", async (e) => {	
+settingsBtn.addEventListener("click", async (e) => {
 	window.location.href = "/settings.html";
 });
 
 toggleHoverBtn.addEventListener("mousedown", function (){
-    const cards = document.querySelectorAll(".card");    
-    const img = document.querySelectorAll(".img");    
+    const cards = document.querySelectorAll(".card");
+    const img = document.querySelectorAll(".img");
     for(let actCard of cards){
         actCard.classList.add("force-hover");
-    }    
+    }
     for(let actImg of img){
         actImg.classList.add("force-hover");
     }
-    
+
 });
 
 toggleHoverBtn.addEventListener("mouseup", function (){
@@ -124,7 +124,7 @@ function findAllAvailablePositions(n, m, gridWidth, gridHeight) {
 function createCard(styles, mensaje) {
     const card = document.createElement('div');
     card.classList.add('card');
-    card.textContent = mensaje;    
+    card.textContent = mensaje;
     for(let efecto of styles){
         giveEffect(efecto, card, cardWidth, cardHeight);
     }
@@ -140,7 +140,7 @@ function createCard(styles, mensaje) {
     container.appendChild(card);
 }
 
-function selectCards(n, m) {
+function selectCards(n, m, exclude) {
     if (n > m) {
         throw new Error("No se pueden generar n números únicos entre 0 y m-1 si n > m");
     }
@@ -150,8 +150,17 @@ function selectCards(n, m) {
         const j = Math.floor(Math.random() * (i + 1));
         [numeros[i], numeros[j]] = [numeros[j], numeros[i]];
     }
+    console.log(numeros, exclude);
+    const nums = [];
+    let pos=0;
+    while (nums.length < n) {
+        if(numeros[pos] != exclude){
+            nums.push(numeros[pos]);
+        }
+        pos++;
+    }
 
-    return numeros.slice(0, n);
+    return nums;
 }
 
 function getFromDB(where) {
@@ -173,16 +182,32 @@ function getFromDB(where) {
 }
 
 window.onload = async function () {
-    placeRectangle({x: audio.getBoundingClientRect().top-audio.getBoundingClientRect().top%10,y: audio.getBoundingClientRect().left-audio.getBoundingClientRect().left%10}, audio.offsetHeight, audio.offsetWidth);    
-    loader.style.display="block";                
+    if(cardWidth == 150) {
+        document.getElementById("backgroundMusic").style.width="100px";
+        document.getElementById("toggleHover").style.right="-30px";
+        document.getElementById("headerText").style.width="70%";
+        document.getElementById("headerText").style.position="absolute";
+        document.getElementById("headerText").style.left="22%";
+    }
+    placeRectangle({x: audio.getBoundingClientRect().top-audio.getBoundingClientRect().top%10,y: audio.getBoundingClientRect().left-audio.getBoundingClientRect().left%10}, audio.offsetHeight, audio.offsetWidth);
+    loader.style.display="block";
     const actSong = songs[getRandomInt(0, songs.length-1)];
-    audio.src=actSong;    
+    audio.src=actSong;
     const wallpaper = Object.values(await getFromDB(`/`));
-    const numCards=Math.min(7,wallpaper.length);
-    const elegidos = selectCards(numCards, wallpaper.length);        
+    let maxIdx=0;
+    for(let c=1; c < wallpaper.length; c++){
+        if(wallpaper.at(c).timestamp > wallpaper.at(maxIdx).timestamp){
+            maxIdx=c;
+        }
+    }
+    const numCards=Math.min(6,wallpaper.length);
+    console.log("died at elegidos fs");
+    const elegidos = selectCards(numCards, wallpaper.length, maxIdx);
+    console.log(Object.values(wallpaper.at(maxIdx).effects), wallpaper.at(maxIdx).message);
+    createCard(Object.values(wallpaper.at(maxIdx).effects), wallpaper.at(maxIdx).message);
     for (let i = 0; i < numCards; i++) {
         const efectos = Object.values(wallpaper.at(elegidos[i]).effects);
-        const mensaje = wallpaper.at(elegidos[i]).message;           
+        const mensaje = wallpaper.at(elegidos[i]).message;
         createCard(efectos, mensaje);
     }
     loader.style.display="none";

@@ -9,6 +9,10 @@ body {
   user-select: none;
 }
 
+audio{
+  width: 250px;
+}
+
 #container {
   position: relative;
   width: 100vw;
@@ -21,10 +25,10 @@ p{
 
 .card {
   z-index: 1;
-  display: flex;             
-  justify-content: center;   
-  align-items: center;      
-  text-align: center;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   position: absolute;
   /* width: 200px;
   height: 150px; */
@@ -42,12 +46,12 @@ p{
 
 .clock{
   z-index: 1;
-  position: absolute;  
+  position: absolute;
   top: 65%;
   right: -5%;
-  height: auto;  
+  height: auto;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.2s ease;   
+  transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
 .card:hover .clock, .force-hover.clock {
@@ -58,12 +62,12 @@ p{
 
 .pumpHeart{
   z-index: 1;
-  position: absolute;  
+  position: absolute;
   top: 65%;
   right: -5%;
-  height: auto;  
+  height: auto;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.2s ease; 
+  transition: opacity 0.3s ease, transform 0.2s ease;
   animation: heartbeat 1s infinite;
 }
 
@@ -93,11 +97,11 @@ p{
 
 .multiHearts{
   z-index: 1;
-  position: absolute;  
+  position: absolute;
   top: 5%;
-  height: auto;  
+  height: auto;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.2s ease; 
+  transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
 .card:hover .multiHearts,.force-hover.multiHearts {
@@ -107,14 +111,14 @@ p{
 }
 
 .sun {
-  position: absolute;  
+  position: absolute;
   top: -15%;
-  right: -15%;  
-  height: auto;  
-  opacity: 0;  
+  right: -15%;
+  height: auto;
+  opacity: 0;
   z-index: 1;
   filter: drop-shadow(0 0 0.5rem rgba(255, 255, 12, 0.788));
-  transition: opacity 0.3s ease, transform 0.2s ease; 
+  transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
 .card:hover .sun,.force-hover.sun {
@@ -125,13 +129,13 @@ p{
 
 .leftLight{
   z-index: 1;
-  position: absolute;  
+  position: absolute;
   top: 8%;
   right: -10%;
-  height: auto;  
+  height: auto;
   opacity: 0;
   filter : sepia(1) saturate(3) hue-rotate(10deg);
-  transition: opacity 0.3s ease, transform 0.2s ease; 
+  transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
 .card:hover .leftLight,.force-hover.leftLight {
@@ -142,12 +146,12 @@ p{
 
 .TopLight{
   z-index: 1;
-  position: absolute;  
+  position: absolute;
   top: -45%;
-  height: auto;  
+  height: auto;
   opacity: 0;
   filter : sepia(0.5) saturate(3) hue-rotate(10deg);
-  transition: opacity 0.3s ease, transform 0.2s ease; 
+  transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
 .card:hover .TopLight,.force-hover.TopLight {
@@ -158,11 +162,11 @@ p{
 
 .musicNotes{
   z-index: 1;
-  position: absolute;  
+  position: absolute;
   top: -15%;
-  height: auto;  
+  height: auto;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.2s ease; 
+  transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
 .card:hover .musicNotes,.force-hover.musicNotes {
@@ -176,9 +180,9 @@ p{
   position: absolute;
   top: -10%;
   width: 150px;
-  height: auto;  
+  height: auto;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease; 
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .card:hover .halo,.force-hover.halo {
@@ -191,20 +195,20 @@ p{
   position: absolute;
   width: 150px;
   height: auto;
-  z-index: 1;  
+  z-index: 1;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease; 
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .wing.left {
   top: 20%;
-  left: -135px;     
+  left: -135px;
   transform: translateY(-50%) rotate(20deg) ;
 }
 
 .wing.right {
   top: 20%;
-  right: -135px; 
+  right: -135px;
   transform: translateY(-50%) rotate(-20deg);
 }
 
