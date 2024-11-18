@@ -151,9 +151,10 @@ function findAllAvailablePositions(n, m, gridWidth, gridHeight) {
     return validPositions;
 }
 
-function createCard(styles, mensaje) {
+function createCard(styles, mensaje, first) {
     const card = document.createElement('div');
     card.classList.add('card');
+    if(first) card.classList.add('glow');
     card.textContent = mensaje;
     for(let efecto of styles){
         giveEffect(efecto, card, cardWidth, cardHeight);
@@ -233,7 +234,7 @@ window.onload = async function () {
     // console.log("died at elegidos fs");
     const elegidos = selectCards(numCards, wallpaper.length, maxIdx);
     // console.log(Object.values(wallpaper.at(maxIdx).effects), wallpaper.at(maxIdx).message);
-    createCard(Object.values(wallpaper.at(maxIdx).effects), wallpaper.at(maxIdx).message);
+    createCard(Object.values(wallpaper.at(maxIdx).effects), wallpaper.at(maxIdx).message, true);
     for (let i = 0; i < numCards; i++) {
         const efectos = Object.values(wallpaper.at(elegidos[i]).effects);
         const mensaje = wallpaper.at(elegidos[i]).message;

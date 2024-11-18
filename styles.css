@@ -23,6 +23,36 @@ p{
     position: absolute;
 }
 
+/* Keyframes for the glowing effect */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ff69b4, 0 0 20px #ff69b4, 0 0 25px #ff69b4, 0 0 30px #ff69b4, 0 0 35px #ff69b4;
+  }
+  50% {
+    box-shadow: 0 0 10px #ffffff, 0 0 20px #ff69b4, 0 0 30px #ff69b4, 0 0 40px #ff69b4, 0 0 50px #ff69b4, 0 0 60px #ff69b4, 0 0 70px #ff69b4;
+  }
+  100% {
+    box-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ff69b4, 0 0 20px #ff69b4, 0 0 25px #ff69b4, 0 0 30px #ff69b4, 0 0 35px #ff69b4;
+  }
+}
+
+/* Glowing effect with fade-out transition */
+.glow {
+  animation: glow 3s ease-in-out, fade-out 1s linear 3s forwards;
+}
+
+/* Fade out keyframes */
+@keyframes fade-out {
+  0% {
+    box-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ff69b4, 0 0 20px #ff69b4, 0 0 25px #ff69b4, 0 0 30px #ff69b4, 0 0 35px #ff69b4;
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+
+
 .card {
   z-index: 1;
   display: flex;
