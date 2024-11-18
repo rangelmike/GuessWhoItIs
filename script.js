@@ -30,7 +30,8 @@ const auth = getAuth(app);
 
 const container = document.getElementById('container');
 const cardWidth = (window.innerWidth > 600?200:150);
-const cardHeight = (cardWidth == 200 ? 150 : 125);
+const onPhone = (cardWidth == 150);
+const cardHeight = (!onPhone ? 150 : 125);
 const audio = document.getElementById("backgroundMusic");
 const toggleHoverBtn = document.getElementById("toggleHover");
 const occupied = Array.from({ length: window.innerHeight }, () => Array(window.innerWidth).fill(false));
@@ -45,6 +46,7 @@ settingsBtn.addEventListener("click", async (e) => {
 });
 
 toggleHoverBtn.addEventListener("mousedown", function (){
+    if(onPhone) return;
     const cards = document.querySelectorAll(".card");
     const img = document.querySelectorAll(".img");
     for(let actCard of cards){
@@ -57,6 +59,7 @@ toggleHoverBtn.addEventListener("mousedown", function (){
 });
 
 toggleHoverBtn.addEventListener("mouseup", function (){
+    if(onPhone) return;
     const cards = document.querySelectorAll(".card");
     const img = document.querySelectorAll(".img");
     for(let actCard of cards){
@@ -67,6 +70,7 @@ toggleHoverBtn.addEventListener("mouseup", function (){
     }
 });
 toggleHoverBtn.addEventListener("mouseleave", function (){
+    if(onPhone) return;
     const cards = document.querySelectorAll(".card");
     const img = document.querySelectorAll(".img");
     for(let actCard of cards){
@@ -75,6 +79,32 @@ toggleHoverBtn.addEventListener("mouseleave", function (){
     for(let actImg of img){
         actImg.classList.remove("force-hover");
     }
+});
+
+let phoneToggleHover = false;
+toggleHoverBtn.addEventListener("click", function(){
+    if(!onPhone) return;
+    if(!phoneToggleHover){
+        const cards = document.querySelectorAll(".card");
+        const img = document.querySelectorAll(".img");
+        for(let actCard of cards){
+            actCard.classList.add("force-hover");
+        }
+        for(let actImg of img){
+            actImg.classList.add("force-hover");
+        }
+    } 
+    else{
+        const cards = document.querySelectorAll(".card");
+        const img = document.querySelectorAll(".img");
+        for(let actCard of cards){
+            actCard.classList.remove("force-hover");
+        }
+        for(let actImg of img){
+            actImg.classList.remove("force-hover");
+        }
+    }
+    phoneToggleHover=!phoneToggleHover;
 });
 
 // logoutBtn.addEventListener("click", () => {
@@ -149,8 +179,7 @@ function selectCards(n, m, exclude) {
     for (let i = numeros.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [numeros[i], numeros[j]] = [numeros[j], numeros[i]];
-    }
-    console.log(numeros, exclude);
+    }    
     const nums = [];
     let pos=0;
     while (nums.length < n) {
@@ -182,7 +211,7 @@ function getFromDB(where) {
 }
 
 window.onload = async function () {
-    if(cardWidth == 150) {
+    if(onPhone) {
         document.getElementById("backgroundMusic").style.width="100px";
         document.getElementById("toggleHover").style.right="-30px";
         document.getElementById("headerText").style.width="70%";
@@ -201,9 +230,9 @@ window.onload = async function () {
         }
     }
     const numCards=Math.min(6,wallpaper.length);
-    console.log("died at elegidos fs");
+    // console.log("died at elegidos fs");
     const elegidos = selectCards(numCards, wallpaper.length, maxIdx);
-    console.log(Object.values(wallpaper.at(maxIdx).effects), wallpaper.at(maxIdx).message);
+    // console.log(Object.values(wallpaper.at(maxIdx).effects), wallpaper.at(maxIdx).message);
     createCard(Object.values(wallpaper.at(maxIdx).effects), wallpaper.at(maxIdx).message);
     for (let i = 0; i < numCards; i++) {
         const efectos = Object.values(wallpaper.at(elegidos[i]).effects);
