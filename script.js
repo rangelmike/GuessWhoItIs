@@ -222,7 +222,7 @@ window.onload = async function () {
     placeRectangle({x: audio.getBoundingClientRect().top-audio.getBoundingClientRect().top%10,y: audio.getBoundingClientRect().left-audio.getBoundingClientRect().left%10}, audio.offsetHeight, audio.offsetWidth);
     loader.style.display="block";
     const actSong = songs[getRandomInt(0, songs.length-1)];
-    audio.src=actSong;
+    // audio.src=actSong;
     const wallpaper = Object.values(await getFromDB(`/`));
     let maxIdx=0;
     for(let c=1; c < wallpaper.length; c++){
