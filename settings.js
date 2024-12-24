@@ -237,9 +237,13 @@ async function main(user){
 		window.location.href = "index.html";
 	}
 	addCardBtn.style.display="block";
-	const allInfo = await getFromDB(`/`);
-	const wallpaper = Object.values(allInfo);
-	const keys = Object.keys(allInfo);
+	const allInfo = await getFromDB(`/`);		
+	// const wallpaper = Object.values(allInfo);	
+	// const keys = Object.keys(allInfo);
+	const entries = Object.entries(allInfo);
+	entries.sort(([,a], [,b]) => a.timestamp - b.timestamp);
+	const wallpaper = entries.map(([, value]) => value);
+	const keys = entries.map(([key]) => key);
     const numCards=wallpaper.length;
     for (let i = 0; i < numCards; i++) {
         const efectos = Object.values(wallpaper.at(i).effects);
