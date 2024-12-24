@@ -39,7 +39,7 @@ const occupied = Array.from({ length: window.innerHeight }, () => Array(window.i
 const settingsBtn = document.getElementById("settingsBtn");
 const loader = document.getElementById("loader");
 
-const songs = ["https://shorturl.at/j0LqN", "https://shorturl.at/VBilJ", "https://shorturl.at/qIdRM", "https://shorturl.at/y9yVX", "https://shorturl.at/McxQY", "https://shorturl.at/vCwM6", "https://shorturl.at/OhVhZ", "https://shorturl.at/HwR7s", "https://shorturl.at/3uafl", "https://shorturl.at/2sb2E", "https://shorturl.at/6YjXc", "https://shorturl.at/ACnGT"];
+const songs = ["https://shorturl.at/j0LqN", "https://shorturl.at/VBilJ", "https://shorturl.at/qIdRM", "https://shorturl.at/y9yVX", "https://shorturl.at/McxQY", "https://shorturl.at/vCwM6", "https://shorturl.at/OhVhZ", "https://shorturl.at/HwR7s", "https://shorturl.at/3uafl", "https://shorturl.at/2sb2E", "https://shorturl.at/6YjXc", "https://shorturl.at/ACnGT", "https://shorturl.at/BWRPM"];
 
 settingsBtn.addEventListener("click", async (e) => {
 	window.location.href = "/settings.html";

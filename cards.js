@@ -112,6 +112,15 @@ function roseCard(card, cardWidth, cardHeight){
     card.append(img);
 }
 
+function giftCard(card, cardWidth, cardHeight){
+    const img = document.createElement('img');
+    img.className="gift n11 img";
+    img.src="https://i.ibb.co/WnJ2J1j/Pngtree-cartoon-hand-painted-purple-gift-3801288.png";
+    img.alt="gift";
+    img.style.width = `${cardWidth*0.5}px`;
+    card.append(img);
+}
+
 export function giveEffect(code, card, cardWidth, cardHeight){
     card.style.width = `${cardWidth}px`;
     card.style.height = `${cardHeight}px`;
@@ -145,6 +154,9 @@ export function giveEffect(code, card, cardWidth, cardHeight){
             break;
         case 10:
             roseCard(card, cardWidth, cardHeight);
+            break;
+        case 11:
+            giftCard(card, cardWidth, cardHeight);
             break;
         default:            
             // console.log("Invalid code", code);            
