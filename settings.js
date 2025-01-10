@@ -82,7 +82,36 @@ function removeFromDB(where){
 	remove(ref(database, where));
 }
 
-function createCard(styles, mensaje, id) {
+function formatTimestamp(epochTimestamp) {
+    // Convert the epoch timestamp to a Date object
+    const date = new Date(epochTimestamp);
+
+    // Format the date as a string (e.g., "YYYY-MM-DD HH:mm:ss")
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} `;
+}
+
+function pastSince(epochTimestamp) {
+    // Get the current time in milliseconds
+    const now = Date.now();
+
+    // Calculate the difference in milliseconds
+    const difference = now - epochTimestamp;
+
+    // Convert milliseconds to days
+    const daysPassed = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+    // Return the result as a string
+    return `(${daysPassed} day${daysPassed !== 1 ? 's' : ''} have passed) `;
+}
+
+function createCard(styles, mensaje, timestamp, id) {
 	const selectEffect = document.createElement("select");
 
 	const actDiv = document.createElement("div");
@@ -124,6 +153,10 @@ function createCard(styles, mensaje, id) {
 	msjDiv.appendChild(editMsg);
 	msjDiv.appendChild(msgInput);
 
+	const timestampText = document.createElement("p");	
+	timestampText.textContent = "Última actualización: ";
+	timestampText.textContent += formatTimestamp(timestamp) + pastSince(timestamp);
+
 	const effectsDiv = document.createElement("div");
 	const effectsText = document.createElement("p");
 	effectsDiv.classList="effectsDiv";
@@ -155,13 +188,11 @@ function createCard(styles, mensaje, id) {
 
 	const newEffectText = document.createElement("p");
 	const newEffectDiv = document.createElement("div");
-	const timestampText = document.createElement("p");	
 	const addEffBtn = document.createElement("button");
 	addEffBtn.classList="button";
 	addEffBtn.innerHTML=addEfInner;
 	newEffectDiv.classList="effectsDiv";
 	newEffectText.textContent="Nuevo efecto: ";
-	timestampText.textContent = "Última actualización: ";
 	newEffectDiv.appendChild(newEffectText);
 	for(let i=0; i<effectsList.length; i++){
 		if(styles.includes(i+1)) continue;
@@ -251,7 +282,8 @@ async function main(user){
     for (let i = 0; i < numCards; i++) {
         const efectos = Object.values(wallpaper.at(i).effects);
         const mensaje = wallpaper.at(i).message;
-		createCard(efectos, mensaje, keys.at(i));
+		const timestamp = wallpaper.at(i).timestamp;
+		createCard(efectos, mensaje, timestamp, keys.at(i));
     }
 }
 
@@ -261,7 +293,7 @@ logoutBtn.addEventListener("click", () => {
 });
 
 addCardBtn.addEventListener("click", function(){
-	createCard([], "New Card", -1);
+	createCard([], "New Card", 0, -1);
 });
 
 document.getElementById("signInBtn").addEventListener("click", async () => {
