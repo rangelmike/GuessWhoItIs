@@ -121,6 +121,15 @@ function giftCard(card, cardWidth, cardHeight){
     card.append(img);
 }
 
+function kissCard(card, cardWidth, cardHeight){
+    const img = document.createElement('img');
+    img.className="kiss n12 img";
+    img.src="https://i.ibb.co/Jq0M93q/pngegg.png";
+    img.alt="kiss";
+    img.style.width = `${cardWidth*0.5}px`;
+    card.append(img);
+}
+
 export function giveEffect(code, card, cardWidth, cardHeight){
     card.style.width = `${cardWidth}px`;
     card.style.height = `${cardHeight}px`;
@@ -158,7 +167,11 @@ export function giveEffect(code, card, cardWidth, cardHeight){
         case 11:
             giftCard(card, cardWidth, cardHeight);
             break;
-        default:            
+        case 12:
+            kissCard(card, cardWidth, cardHeight);
+            break;
+        default:
+            // pumpingHeart(card, cardWidth, cardHeight);            
             // console.log("Invalid code", code);            
             break;
     }
