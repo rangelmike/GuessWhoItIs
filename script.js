@@ -4,6 +4,8 @@ import {
 	ref,
 	get,
 	child,
+    push,
+    remove
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 import {
 	getAuth,
@@ -11,7 +13,7 @@ import {
 	GoogleAuthProvider,
 	signOut,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
-import {giveEffect} from "./cards.js";
+import {giveEffect, haloCard} from "./cards.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAc1-FWefRK9gNkaprncldWqK2jztLV43A",
@@ -211,6 +213,33 @@ function getFromDB(where) {
 		});
 }
 
+function formatTimestamp(epochTimestamp) {
+    // Convert the epoch timestamp to a Date object
+    const date = new Date(epochTimestamp);
+
+    // Format the date as a string (e.g., "YYYY-MM-DD HH:mm:ss")
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} `;
+}
+
+async function manageVisits(){  
+    const timestamp = Date.now();
+    await push(ref(database, "visits"),{
+        [timestamp]:formatTimestamp(timestamp)
+    })
+    const lastVisits = Object.keys(await getFromDB('visits'));
+    const extras = lastVisits.length-10;
+    if(extras <= 0) return;
+    for(let c=0; c < extras; c++)
+        remove(ref(database, `/visits/${lastVisits[c]}`));
+}
+
 window.onload = async function () {
     if(onPhone) {
         document.getElementById("backgroundMusic").style.width="100px";
@@ -224,6 +253,7 @@ window.onload = async function () {
     const actSong = songs[getRandomInt(0, songs.length-1)];
     audio.src=actSong;
     const allInfo = await getFromDB('/');
+    manageVisits();
     const wallpaper = Object.values(allInfo.wallpaper);
     let maxIdx=0;
     for(let c=1; c < wallpaper.length; c++){
