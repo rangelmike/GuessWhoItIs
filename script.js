@@ -223,7 +223,8 @@ window.onload = async function () {
     loader.style.display="block";
     const actSong = songs[getRandomInt(0, songs.length-1)];
     audio.src=actSong;
-    const wallpaper = Object.values(await getFromDB(`/`));
+    const allInfo = await getFromDB('/');
+    const wallpaper = Object.values(allInfo.wallpaper);
     let maxIdx=0;
     for(let c=1; c < wallpaper.length; c++){
         if(wallpaper.at(c).timestamp > wallpaper.at(maxIdx).timestamp){

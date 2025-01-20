@@ -274,7 +274,7 @@ async function main(user){
 	const allInfo = await getFromDB(`/`);		
 	// const wallpaper = Object.values(allInfo);	
 	// const keys = Object.keys(allInfo);
-	const entries = Object.entries(allInfo);
+	const entries = Object.entries(allInfo.wallpaper);
 	entries.sort(([,a], [,b]) => a.timestamp - b.timestamp);
 	const wallpaper = entries.map(([, value]) => value);
 	const keys = entries.map(([key]) => key);
