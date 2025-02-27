@@ -71,7 +71,7 @@ function updateDB(where, effects, message){
 
 function pushToDB(effects, message){
 	const timestamp = Date.now();
-	return push(ref(database, '/'), {
+	return push(ref(database, '/wallpaper/'), {
 		effects, 
 		message, 
 		timestamp
@@ -239,7 +239,7 @@ function createCard(styles, mensaje, timestamp, id) {
 			id = pushToDB(styles, texto.textContent);
 		}
 		else{
-			updateDB('/'+id, styles, texto.textContent);		
+			updateDB('/wallpaper/'+id, styles, texto.textContent);		
 		}
 	});
 
@@ -251,7 +251,7 @@ function createCard(styles, mensaje, timestamp, id) {
 		container.removeChild(msj);
 		container.removeChild(actDiv);
 		if(id != -1){
-			removeFromDB(id);
+			removeFromDB("wallpaper/"+id);
 		}
 	});
 
