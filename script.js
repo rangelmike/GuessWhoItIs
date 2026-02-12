@@ -41,7 +41,7 @@ const occupied = Array.from({ length: window.innerHeight }, () => Array(window.i
 const settingsBtn = document.getElementById("settingsBtn");
 const loader = document.getElementById("loader");
 
-const songs = ["https://shorturl.at/j0LqN", "https://shorturl.at/VBilJ", "https://shorturl.at/qIdRM", "https://shorturl.at/y9yVX", "https://shorturl.at/McxQY", "https://shorturl.at/vCwM6", "https://shorturl.at/OhVhZ", "https://shorturl.at/HwR7s", "https://shorturl.at/3uafl", "https://shorturl.at/2sb2E", "https://shorturl.at/6YjXc", "https://shorturl.at/ACnGT", "https://shorturl.at/BWRPM", "https://shorturl.at/TVAjm"];
+const songs = ["https://archive.org/download/ProjectTQM-NewMusic/girl%20in%20red%20-%20we%20fell%20in%20love%20in%20october.mp3", "https://archive.org/download/te-amo-y-mas/Te%20Amo%20y%20M%C3%A1s.mp3", "https://archive.org/download/ProjectTQM-NewMusic/Nasa%20Histoires%20-%20Bugambilia%20%28lyric%20video%20oficial%29.mp3 Bugambilia", "https://archive.org/download/ProjectTQM-NewMusic/Tomando%20t%C3%A9%20%28cover%29%20%20Kumangy.mp3", "https://archive.org/download/ProjectTQM-NewMusic/JVKE%20-%20her%20%28official%20lyric%20video%29.mp3", "https://archive.org/download/ProjectTQM-NewMusic/Cody%20Fry%20-%20I%20Hear%20a%20Symphony%20%5BSub%20Espa%C3%B1olEnglish%5D.mp3", "https://archive.org/download/ProjectTQM-NewMusic/Elefante%20-%20%C3%81ngel%20%28LetraLyrics%29.mp3", "https://archive.org/download/ProjectTQM-NewMusic/Jake%20Daniels%20-%20Novia%20%28Lyrics%29.mp3", "https://archive.org/download/ProjectTQM-NewMusic/Bruno%20Major%20-%20Nothing%20%28Lyric%20%26%20Chord%20Video%29.mp3", "https://archive.org/download/ProjectTQM-NewMusic/Hoy%20Me%20Levante.mp3", "https://archive.org/download/te-amo-y-mas/Te%20Amo%20y%20M%C3%A1s.mp3", "https://archive.org/download/samanez-tus-ojitos-video-oficial-1/Samanez%20-%20Tus%20Ojitos%20%28Video%20Oficial%29%20%281%29.mp3"];
 
 settingsBtn.addEventListener("click", async (e) => {
 	window.location.href = "/settings.html";
@@ -251,7 +251,7 @@ window.onload = async function () {
     placeRectangle({x: audio.getBoundingClientRect().top-audio.getBoundingClientRect().top%10,y: audio.getBoundingClientRect().left-audio.getBoundingClientRect().left%10}, audio.offsetHeight, audio.offsetWidth);
     loader.style.display="block";
     const actSong = songs[getRandomInt(0, songs.length-1)];
-    //audio.src=actSong;
+    audio.src=actSong;
     const allInfo = await getFromDB('/');
     manageVisits();
     const wallpaper = Object.values(allInfo.wallpaper);
