@@ -1,4 +1,19 @@
-  
+.wand{
+  z-index: 1;
+  position: absolute;
+  top: 55%;
+  left: -15%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.card:hover .wand , .force-hover.wand{
+  z-index: 2;
+  opacity: 0.85;
+  transform: rotate(-10deg) scaleX(-1) translateY(-15%); 
+}
+
 .rose{
     z-index: 1;
     position: absolute;

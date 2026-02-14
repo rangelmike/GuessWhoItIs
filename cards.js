@@ -130,6 +130,15 @@ function kissCard(card, cardWidth, cardHeight){
     card.append(img);
 }
 
+function wandCard(card, cardWidth, cardHeight){    
+    const img = document.createElement('img');
+    img.className="wand n13 img";
+    img.src="https://i.ibb.co/nNTGVG2r/pngegg-1.png";
+    img.alt="wand";
+    img.style.width = `${cardWidth*0.5}px`;
+    card.append(img);
+}
+
 export function giveEffect(code, card, cardWidth, cardHeight){
     card.style.width = `${cardWidth}px`;
     card.style.height = `${cardHeight}px`;
@@ -169,6 +178,9 @@ export function giveEffect(code, card, cardWidth, cardHeight){
             break;
         case 12:
             kissCard(card, cardWidth, cardHeight);
+            break;
+        case 13:
+            wandCard(card, cardWidth, cardHeight);
             break;
         default:
             // pumpingHeart(card, cardWidth, cardHeight);            
