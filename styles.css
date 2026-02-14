@@ -230,7 +230,23 @@ audio{
   cursor: pointer;
 }
 
-.effect:hover {
+.refresh img{
+  width: 28px;                  
+  height: 28px;
+  vertical-align: middle;   
+}
+.refresh{
+  position: absolute;
+  right: 73px;
+  top: 10px;
+  background: black;
+  border: none;
+  padding: 15px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.effect:hover, .refresh:hover{
   background: rgba(126, 119, 119, 0.521);
   transition: 0.5s;
 }

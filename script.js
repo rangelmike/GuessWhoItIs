@@ -36,6 +36,7 @@ const onPhone = (cardWidth == 150);
 const cardHeight = (!onPhone ? 150 : 125);
 const audio = document.getElementById("backgroundMusic");
 const toggleHoverBtn = document.getElementById("toggleHover");
+const refreshBtn = document.getElementById("refreshBtn");
 const occupied = Array.from({ length: window.innerHeight }, () => Array(window.innerWidth).fill(false));
 
 const settingsBtn = document.getElementById("settingsBtn");
@@ -59,6 +60,10 @@ toggleHoverBtn.addEventListener("mousedown", function (){
     }
 
 });
+
+refreshBtn.addEventListener("click", function(){
+    loadWallpaper();
+})
 
 toggleHoverBtn.addEventListener("mouseup", function (){
     if(onPhone) return;
@@ -127,6 +132,15 @@ function placeRectangle({x, y}, n, m){
             }
         }
     }
+}
+
+function clearAvailable(){
+    for (let i = 0; i < occupied.length; i++) {
+        for (let j = 0; j < occupied[i].length; j++) {
+            occupied[i][j] = false;
+        }
+}
+
 }
 
 function findAllAvailablePositions(n, m, gridWidth, gridHeight) {
@@ -240,7 +254,13 @@ async function manageVisits(){
         remove(ref(database, `/visits/${lastVisits[c]}`));
 }
 
-window.onload = async function () {
+async function loadWallpaper() {
+    const notCards = Array.from(container.children).filter(
+        child => !child.classList.contains("card")
+    );
+    container.replaceChildren(...notCards);
+    clearAvailable();
+
     if(onPhone) {
         document.getElementById("backgroundMusic").style.width="100px";
         document.getElementById("toggleHover").style.right="-30px";
@@ -249,9 +269,7 @@ window.onload = async function () {
         document.getElementById("headerText").style.left="22%";
     }
     placeRectangle({x: audio.getBoundingClientRect().top-audio.getBoundingClientRect().top%10,y: audio.getBoundingClientRect().left-audio.getBoundingClientRect().left%10}, audio.offsetHeight, audio.offsetWidth);
-    loader.style.display="block";
-    const actSong = songs[getRandomInt(0, songs.length-1)];
-    audio.src=actSong;
+    loader.style.display="block";    
     const allInfo = await getFromDB('/');
     manageVisits();
     const wallpaper = Object.values(allInfo.wallpaper);
@@ -272,4 +290,10 @@ window.onload = async function () {
         createCard(efectos, mensaje);
     }
     loader.style.display="none";
+}
+
+window.onload = async function () {
+    loadWallpaper();
+    const actSong = songs[getRandomInt(0, songs.length-1)];
+    audio.src=actSong;
 }
